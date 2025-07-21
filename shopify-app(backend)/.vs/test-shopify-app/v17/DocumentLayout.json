@@ -1,0 +1,265 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|c:\\users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\entities\\customers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|solutionrelative:test-shopify-app\\entities\\customers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|c:\\users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\entities\\orders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|solutionrelative:test-shopify-app\\entities\\orders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|c:\\users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\migrations\\20250630105704_createdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|solutionrelative:test-shopify-app\\migrations\\20250630105704_createdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|c:\\users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|solutionrelative:test-shopify-app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|c:\\users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|solutionrelative:test-shopify-app\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|c:\\users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|solutionrelative:test-shopify-app\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|c:\\users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|solutionrelative:test-shopify-app\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|c:\\users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\dtos\\orderdto\\updateorderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|solutionrelative:test-shopify-app\\dtos\\orderdto\\updateorderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|c:\\users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\entities\\deliveryagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|solutionrelative:test-shopify-app\\entities\\deliveryagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|c:\\users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\entities\\orderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|solutionrelative:test-shopify-app\\entities\\orderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|c:\\users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|solutionrelative:test-shopify-app\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|c:\\users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|solutionrelative:test-shopify-app\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|c:\\users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\controllers\\agentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|solutionrelative:test-shopify-app\\controllers\\agentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|c:\\users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|solutionrelative:test-shopify-app\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|c:\\users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{711A32D1-9926-46C1-8164-D8E04C27048A}|test-shopify-app\\test-shopify-app.csproj|solutionrelative:test-shopify-app\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Customers.cs",
+              "DocumentMoniker": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Entities\\Customers.cs",
+              "RelativeDocumentMoniker": "test-shopify-app\\Entities\\Customers.cs",
+              "ToolTip": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Entities\\Customers.cs",
+              "RelativeToolTip": "test-shopify-app\\Entities\\Customers.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T07:35:16.174Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "20250630105704_createdb.cs",
+              "DocumentMoniker": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Migrations\\20250630105704_createdb.cs",
+              "RelativeDocumentMoniker": "test-shopify-app\\Migrations\\20250630105704_createdb.cs",
+              "ToolTip": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Migrations\\20250630105704_createdb.cs",
+              "RelativeToolTip": "test-shopify-app\\Migrations\\20250630105704_createdb.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAqwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T07:33:38.169Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\appsettings.json",
+              "RelativeDocumentMoniker": "test-shopify-app\\appsettings.json",
+              "ToolTip": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\appsettings.json",
+              "RelativeToolTip": "test-shopify-app\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-21T07:31:43.595Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "OrderService.cs",
+              "DocumentMoniker": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Services\\OrderService.cs",
+              "RelativeDocumentMoniker": "test-shopify-app\\Services\\OrderService.cs",
+              "ToolTip": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Services\\OrderService.cs",
+              "RelativeToolTip": "test-shopify-app\\Services\\OrderService.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAvwEEAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-19T12:03:32.517Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CustomerController.cs",
+              "DocumentMoniker": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Controllers\\CustomerController.cs",
+              "RelativeDocumentMoniker": "test-shopify-app\\Controllers\\CustomerController.cs",
+              "ToolTip": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Controllers\\CustomerController.cs",
+              "RelativeToolTip": "test-shopify-app\\Controllers\\CustomerController.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAwwAAAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T07:13:46.603Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "test-shopify-app\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "test-shopify-app\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAswDkAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T07:13:36.489Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UpdateOrderstatus.cs",
+              "DocumentMoniker": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\DTOs\\orderdto\\UpdateOrderstatus.cs",
+              "RelativeDocumentMoniker": "test-shopify-app\\DTOs\\orderdto\\UpdateOrderstatus.cs",
+              "ToolTip": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\DTOs\\orderdto\\UpdateOrderstatus.cs",
+              "RelativeToolTip": "test-shopify-app\\DTOs\\orderdto\\UpdateOrderstatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-19T17:56:18.608Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AgentController.cs",
+              "DocumentMoniker": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Controllers\\AgentController.cs",
+              "RelativeDocumentMoniker": "test-shopify-app\\Controllers\\AgentController.cs",
+              "ToolTip": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Controllers\\AgentController.cs",
+              "RelativeToolTip": "test-shopify-app\\Controllers\\AgentController.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAADwv2sAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T07:14:13.559Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "test-shopify-app\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "test-shopify-app\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAGwAAAAAAAAAAADwv3UAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T07:14:24.318Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Program.cs",
+              "RelativeDocumentMoniker": "test-shopify-app\\Program.cs",
+              "ToolTip": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Program.cs",
+              "RelativeToolTip": "test-shopify-app\\Program.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAACoAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T04:28:47.647Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Orders.cs",
+              "DocumentMoniker": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Entities\\Orders.cs",
+              "RelativeDocumentMoniker": "test-shopify-app\\Entities\\Orders.cs",
+              "ToolTip": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Entities\\Orders.cs",
+              "RelativeToolTip": "test-shopify-app\\Entities\\Orders.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T14:52:26.686Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "test-shopify-app\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "test-shopify-app\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAADwv1cAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T07:13:59.548Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "test-shopify-app\\Controllers\\OrderController.cs",
+              "ToolTip": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "test-shopify-app\\Controllers\\OrderController.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowCwAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T07:13:17.038Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DeliveryAgent.cs",
+              "DocumentMoniker": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Entities\\DeliveryAgent.cs",
+              "RelativeDocumentMoniker": "test-shopify-app\\Entities\\DeliveryAgent.cs",
+              "ToolTip": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Entities\\DeliveryAgent.cs",
+              "RelativeToolTip": "test-shopify-app\\Entities\\DeliveryAgent.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T14:48:02.156Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "OrderStatus.cs",
+              "DocumentMoniker": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Entities\\OrderStatus.cs",
+              "RelativeDocumentMoniker": "test-shopify-app\\Entities\\OrderStatus.cs",
+              "ToolTip": "C:\\Users\\joshua\\source\\repos\\test-shopify-app\\test-shopify-app\\Entities\\OrderStatus.cs",
+              "RelativeToolTip": "test-shopify-app\\Entities\\OrderStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-19T12:07:57.81Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

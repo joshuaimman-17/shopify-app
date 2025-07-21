@@ -1,0 +1,580 @@
+[
+  {
+    "ContainingType": "test_shopify_app.Controllers.AdminController",
+    "Method": "GetAdmin",
+    "RelativePath": "api/Admin/admin/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.AdminController",
+    "Method": "UpdateAdminEmail",
+    "RelativePath": "api/Admin/update-email",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedCustomer",
+        "Type": "test_shopify_app.DTOs.admindto.Updateamail",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.AdminController",
+    "Method": "UpdateCustomerName",
+    "RelativePath": "api/Admin/update-name",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedCustomer",
+        "Type": "test_shopify_app.DTOs.admindto.Updateaname",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.AdminController",
+    "Method": "UpdateAdminPassword",
+    "RelativePath": "api/Admin/update-password",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedCustomer",
+        "Type": "test_shopify_app.DTOs.admindto.Updateapassword",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.AdminController",
+    "Method": "UpdateAdminPhone",
+    "RelativePath": "api/Admin/update-phone",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedCustomer",
+        "Type": "test_shopify_app.DTOs.admindto.Updateaphone",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.AdminController",
+    "Method": "UpdateAdminUsername",
+    "RelativePath": "api/Admin/update-username",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedCustomer",
+        "Type": "test_shopify_app.DTOs.admindto.Updateausername",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.AgentController",
+    "Method": "GetAgent",
+    "RelativePath": "api/Agent/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.AgentController",
+    "Method": "GetAllAgents",
+    "RelativePath": "api/Agent/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.AgentController",
+    "Method": "UpdateAgentEmail",
+    "RelativePath": "api/Agent/UpdateEmail",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedAgent",
+        "Type": "test_shopify_app.DTOs.Agentdto.UpdateAgentEmail",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.AgentController",
+    "Method": "UpdateAgentName",
+    "RelativePath": "api/Agent/UpdateName",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedAgent",
+        "Type": "test_shopify_app.DTOs.Agentdto.UpdateAgentName",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.AgentController",
+    "Method": "UpdateAgentPassword",
+    "RelativePath": "api/Agent/UpdatePassword",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedAgent",
+        "Type": "test_shopify_app.DTOs.Agentdto.UpdateAgentPassword",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.AgentController",
+    "Method": "UpdateAgentUsername",
+    "RelativePath": "api/Agent/UpdateUsername",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedAgent",
+        "Type": "test_shopify_app.DTOs.Agentdto.UpdateAgentUsername",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "test_shopify_app.DTOs.authdto.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.AuthController",
+    "Method": "RegisterAdmin",
+    "RelativePath": "api/Auth/register-admin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newAdmin",
+        "Type": "test_shopify_app.DTOs.admindto.NewAdmin",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.AuthController",
+    "Method": "RegisterAgent",
+    "RelativePath": "api/Auth/Register-agent",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newAgent",
+        "Type": "test_shopify_app.DTOs.Agentdto.NewAgent",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.AuthController",
+    "Method": "RegisterCustomer",
+    "RelativePath": "api/Auth/register-customer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newCustomer",
+        "Type": "test_shopify_app.DTOs.customerdto.NewCustomer",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.CustomerController",
+    "Method": "GetAll",
+    "RelativePath": "api/Customer/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.CustomerController",
+    "Method": "UpdateCustomerEmail",
+    "RelativePath": "api/Customer/update-email",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedCustomer",
+        "Type": "test_shopify_app.DTOs.customerdto.Updatecmail",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.CustomerController",
+    "Method": "UpdateCustomerName",
+    "RelativePath": "api/Customer/update-name",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedCustomer",
+        "Type": "test_shopify_app.DTOs.customerdto.Updatecname",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.CustomerController",
+    "Method": "UpdateCustomerPassword",
+    "RelativePath": "api/Customer/update-password",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedCustomer",
+        "Type": "test_shopify_app.DTOs.customerdto.Updatecpassword",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.CustomerController",
+    "Method": "UpdateCustomerPhone",
+    "RelativePath": "api/Customer/update-phone",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedCustomer",
+        "Type": "test_shopify_app.DTOs.customerdto.Updatecphone",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.CustomerController",
+    "Method": "UpdateCustomerUsername",
+    "RelativePath": "api/Customer/update-username",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedCustomer",
+        "Type": "test_shopify_app.DTOs.customerdto.Updatecusername",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.CustomerController",
+    "Method": "GetCustomer",
+    "RelativePath": "api/Customer/user/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OrderController",
+    "Method": "GetOrderById",
+    "RelativePath": "api/Order/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OrderController",
+    "Method": "GetAllOrders",
+    "RelativePath": "api/Order/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OrderController",
+    "Method": "getallStatus",
+    "RelativePath": "api/Order/all-status",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OrderController",
+    "Method": "AssignOrderToAgent",
+    "RelativePath": "api/Order/assign-agent",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "assignAgent",
+        "Type": "test_shopify_app.DTOs.orderdto.asignAgent",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OrderController",
+    "Method": "CancelOrder",
+    "RelativePath": "api/Order/cancel/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OrderController",
+    "Method": "GetOrdersOfCustomer",
+    "RelativePath": "api/Order/customer/{customerId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "customerId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OrderController",
+    "Method": "getstatus",
+    "RelativePath": "api/Order/GET-order-status",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OrderController",
+    "Method": "PlaceOrder",
+    "RelativePath": "api/Order/place",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newOrder",
+        "Type": "test_shopify_app.DTOs.orderdto.NewOrder",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OrderController",
+    "Method": "UpdateOrderDelivery",
+    "RelativePath": "api/Order/update-delivery",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedOrder",
+        "Type": "test_shopify_app.DTOs.orderdto.UpdateOrderinfo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OrderController",
+    "Method": "UpdateOrderStatus",
+    "RelativePath": "api/Order/update-status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedOrder",
+        "Type": "test_shopify_app.DTOs.orderdto.UpdateOrderstatus",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.ProductController",
+    "Method": "AddProduct",
+    "RelativePath": "api/Product/add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newProduct",
+        "Type": "test_shopify_app.DTOs.productdto.NewProduct",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.ProductController",
+    "Method": "GetAllProducts",
+    "RelativePath": "api/Product/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.ProductController",
+    "Method": "DeleteProduct",
+    "RelativePath": "api/Product/delete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.ProductController",
+    "Method": "GetProductById",
+    "RelativePath": "api/Product/get/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test_shopify_app.Controllers.ProductController",
+    "Method": "UpdateProduct",
+    "RelativePath": "api/Product/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productDto",
+        "Type": "test_shopify_app.DTOs.productdto.ProductWId",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
