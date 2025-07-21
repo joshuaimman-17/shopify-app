@@ -19,6 +19,7 @@ const AgentPanel = () => {
   const [customers, setCustomers] = useState([]);
   const [orderStatuses, setOrderStatuses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [updatingStatus, setUpdatingStatus] = useState(null); // Track which order is being updated
 
   useEffect(() => {
     if (user?.id) {
@@ -71,19 +72,58 @@ const AgentPanel = () => {
       return;
     }
 
+    // Find the status name for confirmation
+    const selectedStatus = orderStatuses.find(s => s.id === parseInt(newStatusId));
+    const statusName = selectedStatus ? selectedStatus.status : `Status ${newStatusId}`;
+
+    const confirmed = window.confirm(
+      `Are you sure you want to update Order #${orderId} to "${statusName}"?`
+    );
+
+    if (!confirmed) return;
+
     try {
-      console.log('Updating order status:', { orderId, statusId: newStatusId });
+      // Set loading state for this specific order
+      setUpdatingStatus(orderId);
+
+      console.log('Updating order status:', { orderId, status: newStatusId, statusName });
+
       const response = await apiUpdateOrderStatus({
         orderId: parseInt(orderId),
-        statusId: parseInt(newStatusId)
+        status: parseInt(newStatusId)
       });
 
       console.log('Order status update response:', response);
-      await fetchData(); // Refresh data
-      alert('Order status updated successfully!');
+
+      // Force refresh with delay to ensure backend is updated
+      setTimeout(async () => {
+        await fetchData();
+
+        // Verify the status update
+        const updatedOrders = await getAllOrders();
+        const updatedOrder = updatedOrders.data?.find(o =>
+          (o.orderId || o.id) === parseInt(orderId)
+        );
+
+        if (updatedOrder) {
+          const updatedStatus = updatedOrder.statusId || updatedOrder.status || updatedOrder.orderStatus;
+          console.log('Status update verification:', {
+            orderId,
+            expectedStatus: newStatusId,
+            actualStatus: updatedStatus,
+            statusName: getStatusDisplayText(updatedStatus)
+          });
+        }
+
+        alert(`✅ Order #${orderId} status updated to "${statusName}" successfully!`);
+      }, 500);
+
     } catch (error) {
       console.error('Failed to update order status:', error);
-      alert('Failed to update order status: ' + (error.response?.data?.message || error.message));
+      alert('❌ Failed to update order status: ' + (error.response?.data?.message || error.message));
+    } finally {
+      // Clear loading state
+      setUpdatingStatus(null);
     }
   };
 
@@ -235,37 +275,67 @@ const AgentPanel = () => {
                               )}
                             </td>
                             <td>
-                              <span className={`badge ${statusBadgeClass}`}>
-                                {statusDisplayText}
-                              </span>
+                              <div className="d-flex align-items-center">
+                                <span className={`badge ${statusBadgeClass} me-2`}>
+                                  {statusDisplayText}
+                                </span>
+                                {updatingStatus === orderId && (
+                                  <small className="text-muted">
+                                    <i className="fas fa-arrow-right me-1"></i>
+                                    Updating...
+                                  </small>
+                                )}
+                              </div>
                             </td>
                             <td>
-                              <select
-                                className="form-select form-select-sm"
-                                onChange={(e) => updateOrderStatus(orderId, e.target.value)}
-                                value={orderStatus || ""}
-                              >
-                                <option value="">Update Status</option>
-                                {orderStatuses.length > 0 ? (
-                                  orderStatuses
-                                    .filter(status => status.status !== 'CANCELED') // Exclude CANCELED - only customers can cancel
-                                    .map(status => (
-                                      <option key={status.id} value={status.id}>
-                                        {status.status}
-                                      </option>
-                                    ))
-                                ) : (
-                                  // Fallback options if API statuses not loaded (excluding CANCELED - only customers can cancel)
-                                  <>
-                                    <option value="1">PLACED</option>
-                                    <option value="2">PROCESSED</option>
-                                    <option value="3">SHIPPED</option>
-                                    <option value="4">REACHED HUB</option>
-                                    <option value="5">OUT FOR DELIVERY</option>
-                                    <option value="6">DELIVERED</option>
-                                  </>
-                                )}
-                              </select>
+                              {updatingStatus === orderId ? (
+                                <div className="d-flex align-items-center">
+                                  <div className="spinner-border spinner-border-sm text-primary me-2" role="status">
+                                    <span className="visually-hidden">Updating...</span>
+                                  </div>
+                                  <small className="text-primary">Updating status...</small>
+                                </div>
+                              ) : (
+                                <select
+                                  className="form-select form-select-sm"
+                                  onChange={(e) => {
+                                    if (e.target.value) {
+                                      updateOrderStatus(orderId, e.target.value);
+                                      // Reset dropdown after selection
+                                      e.target.value = "";
+                                    }
+                                  }}
+                                  defaultValue=""
+                                  disabled={updatingStatus === orderId}
+                                >
+                                  <option value="">Update Status</option>
+                                  {orderStatuses.length > 0 ? (
+                                    orderStatuses
+                                      .filter(status => {
+                                        // Exclude CANCELED - only customers can cancel
+                                        // Also exclude current status from dropdown
+                                        const currentStatusId = (orderStatus || 1).toString();
+                                        const statusId = status.id.toString();
+                                        return status.status !== 'CANCELED' && statusId !== currentStatusId;
+                                      })
+                                      .map(status => (
+                                        <option key={status.id} value={status.id}>
+                                          {status.status}
+                                        </option>
+                                      ))
+                                  ) : (
+                                    // Fallback options if API statuses not loaded (excluding CANCELED and current status)
+                                    <>
+                                      {orderStatus !== 1 && <option value="1">PLACED</option>}
+                                      {orderStatus !== 2 && <option value="2">PROCESSED</option>}
+                                      {orderStatus !== 3 && <option value="3">SHIPPED</option>}
+                                      {orderStatus !== 4 && <option value="4">REACHED HUB</option>}
+                                      {orderStatus !== 5 && <option value="5">OUT FOR DELIVERY</option>}
+                                      {orderStatus !== 6 && <option value="6">DELIVERED</option>}
+                                    </>
+                                  )}
+                                </select>
+                              )}
                             </td>
                           </tr>
                         );
