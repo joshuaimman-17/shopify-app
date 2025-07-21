@@ -9,10 +9,40 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [activeSearchTerm, setActiveSearchTerm] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  const handleSearch = async () => {
+    if (searchTerm.trim() === '') {
+      // If search term is empty, show all products
+      setActiveSearchTerm('');
+      return;
+    }
+
+    setIsSearching(true);
+    setActiveSearchTerm(searchTerm.trim());
+
+    // Simulate search delay for better UX
+    setTimeout(() => {
+      setIsSearching(false);
+    }, 300);
+  };
+
+  const handleClearSearch = () => {
+    setSearchTerm('');
+    setActiveSearchTerm('');
+    setIsSearching(false);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   const fetchProducts = async () => {
     try {
@@ -45,11 +75,14 @@ const Home = () => {
   };
 
   const filteredProducts = products.filter(product => {
+    // If no active search term, show all products
+    if (!activeSearchTerm) return true;
+
     const name = product.ProductName || product.productName || '';
     const description = product.ProductDescription || product.productDescription || '';
     return (
-      name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      description.toLowerCase().includes(searchTerm.toLowerCase())
+      name.toLowerCase().includes(activeSearchTerm.toLowerCase()) ||
+      description.toLowerCase().includes(activeSearchTerm.toLowerCase())
     );
   });
 
@@ -101,7 +134,7 @@ const Home = () => {
 
       {/* Search Section */}
       <div className="row mb-4">
-        <div className="col-md-6 mx-auto">
+        <div className="col-md-8 mx-auto">
           <div className="input-group">
             <span className="input-group-text bg-danger text-white">
               <FaSearch />
@@ -109,11 +142,54 @@ const Home = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Search products..."
+              placeholder="Search products by name or description..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={handleKeyDown}
             />
+            <button
+              className="btn btn-danger"
+              type="button"
+              onClick={handleSearch}
+              disabled={isSearching}
+            >
+              {isSearching ? (
+                <>
+                  <div className="spinner-border spinner-border-sm me-2" role="status">
+                    <span className="visually-hidden">Searching...</span>
+                  </div>
+                  Searching...
+                </>
+              ) : (
+                <>
+                  <FaSearch className="me-2" />
+                  Search
+                </>
+              )}
+            </button>
+            {(searchTerm || activeSearchTerm) && (
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                onClick={handleClearSearch}
+                title="Clear search"
+              >
+                <i className="fas fa-times"></i>
+              </button>
+            )}
           </div>
+          {activeSearchTerm && !isSearching && (
+            <small className="text-success mt-2 d-block">
+              <i className="fas fa-check me-1"></i>
+              Showing results for "{activeSearchTerm}" ({filteredProducts.length} found)
+            </small>
+          )}
+          {isSearching && (
+            <small className="text-info mt-2 d-block">
+              <i className="fas fa-search me-1"></i>
+              Searching for "{searchTerm}"...
+            </small>
+          )}
         </div>
       </div>
 
@@ -144,9 +220,11 @@ const Home = () => {
           <div className="d-flex justify-content-between align-items-center mb-4">
             <h2>
               <i className="fas fa-shopping-bag me-2 text-danger"></i>
-              All Products
+              {activeSearchTerm ? `Search Results` : 'All Products'}
             </h2>
-           
+            <span className="badge bg-danger fs-6">
+              {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
+            </span>
           </div>
 
           {filteredProducts.length === 0 ? (
@@ -154,12 +232,12 @@ const Home = () => {
               <i className="fas fa-search fa-5x text-muted mb-3"></i>
               <h4>No products found</h4>
               <p className="text-muted">
-                {searchTerm ? 'Try adjusting your search terms' : 'No products available at the moment'}
+                {activeSearchTerm ? `No products found for "${activeSearchTerm}". Try adjusting your search terms.` : 'No products available at the moment'}
               </p>
-              {searchTerm && (
-                <button 
+              {activeSearchTerm && (
+                <button
                   className="btn btn-danger"
-                  onClick={() => setSearchTerm('')}
+                  onClick={handleClearSearch}
                 >
                   <i className="fas fa-times me-2"></i>
                   Clear Search

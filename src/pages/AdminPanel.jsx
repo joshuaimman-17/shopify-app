@@ -20,6 +20,11 @@ const AdminPanel = () => {
   const [orders, setOrders] = useState([]);
   const [agents, setAgents] = useState([]);
   const [customers, setCustomers] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [showOrderModal, setShowOrderModal] = useState(false);
+  const [orderSearchTerm, setOrderSearchTerm] = useState('');
+  const [orderStatusFilter, setOrderStatusFilter] = useState('');
+  const [assigningAgent, setAssigningAgent] = useState(null); // Track which order is being assigned
 
   const [loading, setLoading] = useState(false);
   const [productForm, setProductForm] = useState({
@@ -96,25 +101,25 @@ const AdminPanel = () => {
     if (order.agent?.name) return order.agent.name;
     if (order.deliveryAgent?.agentName) return order.deliveryAgent.agentName;
     if (order.agent?.agentName) return order.agent.agentName;
+    if (order.deliveryAgent?.AgentName) return order.deliveryAgent.AgentName;
+    if (order.agent?.AgentName) return order.agent.AgentName;
 
     // If not found in order, look up in agents list
     if (agentId) {
       const agent = agents.find(a =>
         a.agentId === agentId ||
         a.id === agentId ||
-        a.userId === agentId
+        a.userId === agentId ||
+        a.agentId === parseInt(agentId) ||
+        a.id === parseInt(agentId)
       );
 
-      console.log(`Looking for agent ${agentId}:`, agent);
-
       if (agent) {
-        const name = agent.agentName || agent.name || agent.AgentName || agent.username || `Agent ${agentId}`;
-        console.log(`Found agent name: ${name}`);
+        const name = agent.AgentName || agent.agentName || agent.name || agent.username || `Agent ${agentId}`;
         return name;
       }
 
       // If agent ID exists but agent not found in list, show ID
-      console.log(`Agent ${agentId} not found in agents list`);
       return `Agent ${agentId}`;
     }
 
@@ -204,27 +209,97 @@ const AdminPanel = () => {
       return;
     }
 
+    // Find agent name for confirmation
+    const selectedAgent = agents.find(a =>
+      (a.agentId || a.id) === parseInt(agentId) || (a.agentId || a.id) === agentId
+    );
+    const agentName = selectedAgent ?
+      (selectedAgent.AgentName || selectedAgent.agentName || selectedAgent.name || `Agent ${agentId}`) :
+      `Agent ${agentId}`;
+
+    const confirmed = window.confirm(
+      `Are you sure you want to assign "${agentName}" to Order #${orderId}?`
+    );
+
+    if (!confirmed) return;
+
     try {
-      console.log('Assigning agent:', { orderId, agentId });
+      // Set loading state for this specific order
+      setAssigningAgent(orderId);
+
+      console.log('Assigning agent:', { orderId, agentId, agentName });
+
       const response = await assignAgentToOrder({
-        orderId,
-        agentId
+        orderId: parseInt(orderId),
+        agentId: parseInt(agentId)
       });
 
       console.log('Agent assignment response:', response);
 
-      // Refresh orders to see the updated assignment
-      await fetchOrders();
+      // Force refresh with a small delay to ensure backend is updated
+      setTimeout(async () => {
+        await fetchOrders();
+        await fetchAgents();
 
-      // Also refresh agents in case their status changed
-      await fetchAgents();
+        // Verify the assignment was successful
+        const updatedOrders = await getAllOrders();
+        const updatedOrder = updatedOrders.data?.find(o =>
+          (o.orderId || o.id) === parseInt(orderId) || (o.orderId || o.id) === orderId
+        );
 
-      alert('Agent assigned successfully!');
+        if (updatedOrder) {
+          const updatedAgentId = updatedOrder.agentId ||
+                               updatedOrder.deliveryAgent?.id ||
+                               updatedOrder.deliveryAgent?.agentId ||
+                               updatedOrder.agent?.id ||
+                               updatedOrder.agent?.agentId ||
+                               updatedOrder.deliveryAgentId;
+
+          console.log('Assignment verification:', {
+            orderId,
+            expectedAgentId: agentId,
+            actualAgentId: updatedAgentId,
+            updatedOrder
+          });
+        }
+
+        alert(`✅ Agent "${agentName}" has been successfully assigned to Order #${orderId}!`);
+      }, 500);
+
     } catch (error) {
       console.error('Failed to assign agent:', error);
-      alert('Failed to assign agent: ' + (error.response?.data?.message || error.message));
+      alert('❌ Failed to assign agent: ' + (error.response?.data?.message || error.message));
+    } finally {
+      // Clear loading state
+      setAssigningAgent(null);
     }
   };
+
+
+
+  const handleViewOrderDetails = (order) => {
+    setSelectedOrder(order);
+    setShowOrderModal(true);
+  };
+
+  const handleCloseOrderModal = () => {
+    setSelectedOrder(null);
+    setShowOrderModal(false);
+  };
+
+  // Filter orders based on search term and status filter
+  const filteredOrders = orders.filter(order => {
+    const orderId = (order.orderId || order.id || '').toString().toLowerCase();
+    const customerName = getCustomerUsername(order.customerId || order.customer?.id || order.customer).toLowerCase();
+    const searchMatch = orderSearchTerm === '' ||
+      orderId.includes(orderSearchTerm.toLowerCase()) ||
+      customerName.includes(orderSearchTerm.toLowerCase());
+
+    const statusMatch = orderStatusFilter === '' ||
+      getStatusDisplayText(order.statusId || order.status || order.orderStatus || 1) === orderStatusFilter;
+
+    return searchMatch && statusMatch;
+  });
 
 
 
@@ -379,20 +454,20 @@ const AdminPanel = () => {
                     <table className="table table-striped">
                       <thead>
                         <tr>
+                          <th>S.No</th>
                           <th>ID</th>
                           <th>Name</th>
                           <th>Price</th>
-                          
                           <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {products.map(product => (
+                        {products.map((product, index) => (
                           <tr key={product.productId}>
+                            <td>{index + 1}</td>
                             <td>{product.productId}</td>
                             <td>{product.ProductName || product.productName}</td>
                             <td>₹{product.ProductPrice || product.productPrice}</td>
-          
                             <td>
                               <div className="d-flex gap-2">
                                 <button
@@ -430,16 +505,67 @@ const AdminPanel = () => {
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h5 className="card-title mb-0">
                 <i className="fas fa-shopping-cart me-2 text-danger"></i>
-                Orders Management
+                Orders Management ({filteredOrders.length} of {orders.length})
               </h5>
-              <button
-                className="btn btn-outline-danger"
-                onClick={fetchOrders}
-                disabled={loading}
-              >
-                <i className="fas fa-sync-alt me-2"></i>
-                Refresh
-              </button>
+              <div className="d-flex gap-2">
+                <button
+                  className="btn btn-outline-danger"
+                  onClick={async () => {
+                    await fetchOrders();
+                    await fetchAgents();
+                  }}
+                  disabled={loading}
+                >
+                  <i className="fas fa-sync-alt me-2"></i>
+                  Refresh All
+                </button>
+              </div>
+            </div>
+
+            {/* Search and Filter Controls */}
+            <div className="row mb-3">
+              <div className="col-md-6">
+                <div className="input-group">
+                  <span className="input-group-text">
+                    <i className="fas fa-search"></i>
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Search by Order ID or Customer Name..."
+                    value={orderSearchTerm}
+                    onChange={(e) => setOrderSearchTerm(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="col-md-3">
+                <select
+                  className="form-select"
+                  value={orderStatusFilter}
+                  onChange={(e) => setOrderStatusFilter(e.target.value)}
+                >
+                  <option value="">All Statuses</option>
+                  <option value="PLACED">PLACED</option>
+                  <option value="PROCESSED">PROCESSED</option>
+                  <option value="SHIPPED">SHIPPED</option>
+                  <option value="REACHED HUB">REACHED HUB</option>
+                  <option value="OUT FOR DELIVERY">OUT FOR DELIVERY</option>
+                  <option value="DELIVERED">DELIVERED</option>
+                  <option value="CANCELED">CANCELED</option>
+                </select>
+              </div>
+              <div className="col-md-3">
+                <button
+                  className="btn btn-outline-secondary w-100"
+                  onClick={() => {
+                    setOrderSearchTerm('');
+                    setOrderStatusFilter('');
+                  }}
+                >
+                  <i className="fas fa-times me-2"></i>
+                  Clear Filters
+                </button>
+              </div>
             </div>
 
             {/* Order Statistics */}
@@ -455,7 +581,10 @@ const AdminPanel = () => {
               <div className="col-md-3">
                 <div className="card bg-warning text-dark">
                   <div className="card-body text-center">
-                    <h4>{orders.filter(o => (o.status || '').toLowerCase() === 'pending').length}</h4>
+                    <h4>{orders.filter(o => {
+                      const status = getStatusDisplayText(o.statusId || o.status || o.orderStatus || 1);
+                      return ['PLACED', 'PROCESSED'].includes(status.toUpperCase());
+                    }).length}</h4>
                     <small>Pending Orders</small>
                   </div>
                 </div>
@@ -463,7 +592,10 @@ const AdminPanel = () => {
               <div className="col-md-3">
                 <div className="card bg-success text-white">
                   <div className="card-body text-center">
-                    <h4>{orders.filter(o => (o.status || '').toLowerCase() === 'delivered').length}</h4>
+                    <h4>{orders.filter(o => {
+                      const status = getStatusDisplayText(o.statusId || o.status || o.orderStatus || 1);
+                      return status.toUpperCase() === 'DELIVERED';
+                    }).length}</h4>
                     <small>Delivered Orders</small>
                   </div>
                 </div>
@@ -471,7 +603,7 @@ const AdminPanel = () => {
               <div className="col-md-3">
                 <div className="card bg-info text-white">
                   <div className="card-body text-center">
-                    <h4>₹{orders.reduce((sum, o) => sum + (o.totalAmount || o.totalprice || o.totalPrice || o.total || 0), 0)}</h4>
+                    <h4>₹{orders.reduce((sum, o) => sum + (o.totalAmount || o.totalprice || o.totalPrice || o.total || 0), 0).toLocaleString()}</h4>
                     <small>Total Revenue</small>
                   </div>
                 </div>
@@ -482,6 +614,7 @@ const AdminPanel = () => {
               <table className="table table-striped">
                 <thead>
                   <tr>
+                    <th>S.No</th>
                     <th>Order ID</th>
                     <th>Customer</th>
                     <th>Total</th>
@@ -491,9 +624,9 @@ const AdminPanel = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {orders.length === 0 ? (
+                  {filteredOrders.length === 0 ? (
                     <tr>
-                      <td colSpan="6" className="text-center py-4">
+                      <td colSpan="7" className="text-center py-4">
                         {loading ? (
                           <div>
                             <div className="spinner-border text-danger me-2" role="status">
@@ -504,13 +637,13 @@ const AdminPanel = () => {
                         ) : (
                           <div className="text-muted">
                             <i className="fas fa-inbox fa-2x mb-2"></i>
-                            <p>No orders found</p>
+                            <p>{orders.length === 0 ? 'No orders found' : 'No orders match your search criteria'}</p>
                           </div>
                         )}
                       </td>
                     </tr>
                   ) : (
-                    orders.map((order, index) => {
+                    filteredOrders.map((order, index) => {
                       // Handle different order data structures
                       const orderId = order.orderId || order.id || order.orderNumber || `ORDER-${index + 1}`;
                       const customerId = order.customerId || order.customer?.id || order.customer || 'Unknown';
@@ -518,8 +651,31 @@ const AdminPanel = () => {
                       const totalPrice = order.totalAmount || order.totalprice || order.totalPrice || order.total || 0;
                       // Handle both old string format and new ID format for order status
                       const orderStatus = order.statusId || order.status || order.orderStatus || 1; // Default to PLACED (ID: 1)
-                      const agentId = order.agentId || order.deliveryAgent?.id || order.agent?.id;
+
+                      // Extract agent ID from multiple possible sources
+                      const agentId = order.agentId ||
+                                    order.deliveryAgent?.id ||
+                                    order.deliveryAgent?.agentId ||
+                                    order.agent?.id ||
+                                    order.agent?.agentId ||
+                                    order.deliveryAgentId;
+
                       const agentName = getAgentName(agentId, order);
+
+                      // Debug logging for agent assignment
+                      if (agentId && index === 0) {
+                        console.log('Agent assignment debug:', {
+                          orderId,
+                          agentId,
+                          agentName,
+                          orderAgentData: {
+                            agentId: order.agentId,
+                            deliveryAgent: order.deliveryAgent,
+                            agent: order.agent,
+                            deliveryAgentId: order.deliveryAgentId
+                          }
+                        });
+                      }
 
                       // Debug logging for order data
                       if (index === 0) { // Only log for first order to avoid spam
@@ -544,8 +700,15 @@ const AdminPanel = () => {
 
                       return (
                         <tr key={orderId}>
+                          <td>{index + 1}</td>
                           <td>
-                            <strong>#{orderId}</strong>
+                            <button
+                              className="btn btn-link p-0 text-decoration-none"
+                              onClick={() => handleViewOrderDetails(order)}
+                              title="Click to view order details"
+                            >
+                              <strong className="text-danger">#{orderId}</strong>
+                            </button>
                           </td>
                           <td>
                             <div>
@@ -563,22 +726,75 @@ const AdminPanel = () => {
                             </span>
                           </td>
                           <td>
-                            <i className="fas fa-truck me-1"></i>
-                            {agentName}
+                            <div className="d-flex align-items-center">
+                              <i className="fas fa-truck me-2 text-primary"></i>
+                              <span className={agentId ? 'text-success fw-bold' : 'text-muted'}>
+                                {agentName}
+                              </span>
+                            </div>
                           </td>
                           <td>
-                            <select
-                              className="form-select form-select-sm"
-                              onChange={(e) => handleAssignAgent(orderId, e.target.value)}
-                              value={agentId || ""}
-                            >
-                              <option value="">{agentId ? 'Change Agent' : 'Assign Agent'}</option>
-                              {agents.map(agent => (
-                                <option key={agent.agentId || agent.id} value={agent.agentId || agent.id}>
-                                  {agent.AgentName || agent.agentName || agent.name || `Agent ${agent.agentId || agent.id}`}
-                                </option>
-                              ))}
-                            </select>
+                            {assigningAgent === orderId ? (
+                              <div className="d-flex align-items-center">
+                                <div className="spinner-border spinner-border-sm text-primary me-2" role="status">
+                                  <span className="visually-hidden">Assigning...</span>
+                                </div>
+                                <small className="text-primary">Assigning agent...</small>
+                              </div>
+                            ) : agentId ? (
+                              <div className="d-flex gap-2 align-items-center">
+                                <span className="badge bg-success">
+                                  <i className="fas fa-check me-1"></i>
+                                  Assigned
+                                </span>
+                                <select
+                                  className="form-select form-select-sm"
+                                  onChange={(e) => {
+                                    if (e.target.value && e.target.value !== agentId.toString()) {
+                                      handleAssignAgent(orderId, e.target.value);
+                                      // Reset dropdown after assignment
+                                      e.target.value = "";
+                                    }
+                                  }}
+                                  defaultValue=""
+                                  style={{ minWidth: '120px' }}
+                                  disabled={assigningAgent === orderId}
+                                >
+                                  <option value="">Change Agent</option>
+                                  {agents
+                                    .filter(agent => {
+                                      const currentAgentId = (agent.agentId || agent.id).toString();
+                                      return currentAgentId !== agentId.toString();
+                                    })
+                                    .map(agent => (
+                                      <option key={agent.agentId || agent.id} value={agent.agentId || agent.id}>
+                                        {agent.AgentName || agent.agentName || agent.name || `Agent ${agent.agentId || agent.id}`}
+                                      </option>
+                                    ))}
+                                </select>
+                              </div>
+                            ) : (
+                              <select
+                                className="form-select form-select-sm"
+                                onChange={(e) => {
+                                  if (e.target.value) {
+                                    handleAssignAgent(orderId, e.target.value);
+                                    // Reset dropdown after assignment
+                                    e.target.value = "";
+                                  }
+                                }}
+                                defaultValue=""
+                                style={{ minWidth: '150px' }}
+                                disabled={assigningAgent === orderId}
+                              >
+                                <option value="">{assigningAgent === orderId ? 'Assigning...' : 'Select Agent'}</option>
+                                {agents.map(agent => (
+                                  <option key={agent.agentId || agent.id} value={agent.agentId || agent.id}>
+                                    {agent.AgentName || agent.agentName || agent.name || `Agent ${agent.agentId || agent.id}`}
+                                  </option>
+                                ))}
+                              </select>
+                            )}
                           </td>
                         </tr>
                       );
@@ -600,6 +816,7 @@ const AdminPanel = () => {
               <table className="table table-striped">
                 <thead>
                   <tr>
+                    <th>S.No</th>
                     <th>Agent ID</th>
                     <th>Name</th>
                     <th>Email</th>
@@ -608,8 +825,9 @@ const AdminPanel = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {agents.map(agent => (
+                  {agents.map((agent, index) => (
                     <tr key={agent.agentId}>
+                      <td>{index + 1}</td>
                       <td>{agent.agentId}</td>
                       <td>{agent.agentName}</td>
                       <td>{agent.agentEmail}</td>
@@ -621,6 +839,86 @@ const AdminPanel = () => {
                   ))}
                 </tbody>
               </table>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Order Details Modal */}
+      {showOrderModal && selectedOrder && (
+        <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+          <div className="modal-dialog modal-lg">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">
+                  <i className="fas fa-receipt me-2 text-danger"></i>
+                  Order Details - #{selectedOrder.orderId || selectedOrder.id}
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={handleCloseOrderModal}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-6">
+                    <h6 className="text-danger">Order Information</h6>
+                    <p><strong>Order ID:</strong> #{selectedOrder.orderId || selectedOrder.id}</p>
+                    <p><strong>Customer:</strong> {getCustomerUsername(selectedOrder.customerId || selectedOrder.customer?.id || selectedOrder.customer)}</p>
+                    <p><strong>Total Amount:</strong> ₹{selectedOrder.totalAmount || selectedOrder.totalprice || selectedOrder.totalPrice || selectedOrder.total || 0}</p>
+                    <p><strong>Status:</strong>
+                      <span className={`badge ${getStatusBadgeClass(selectedOrder.statusId || selectedOrder.status)} ms-2`}>
+                        {getStatusDisplayText(selectedOrder.statusId || selectedOrder.status)}
+                      </span>
+                    </p>
+                    <p><strong>Order Date:</strong> {new Date(selectedOrder.orderDate || selectedOrder.createdAt || new Date()).toLocaleDateString()}</p>
+                  </div>
+                  <div className="col-md-6">
+                    <h6 className="text-danger">Delivery Information</h6>
+                    <p><strong>Agent:</strong> {getAgentName(selectedOrder.agentId || selectedOrder.deliveryAgent?.id, selectedOrder)}</p>
+                    <p><strong>Address:</strong> {selectedOrder.address || selectedOrder.deliveryAddress || 'Not provided'}</p>
+                    <p><strong>Phone:</strong> {selectedOrder.phone || selectedOrder.customerPhone || 'Not provided'}</p>
+                  </div>
+                </div>
+
+                {selectedOrder.products && selectedOrder.products.length > 0 && (
+                  <div className="mt-4">
+                    <h6 className="text-danger">Order Items</h6>
+                    <div className="table-responsive">
+                      <table className="table table-sm">
+                        <thead>
+                          <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {selectedOrder.products.map((item, index) => (
+                            <tr key={index}>
+                              <td>{item.productName || item.name || 'Unknown Product'}</td>
+                              <td>{item.quantity || 1}</td>
+                              <td>₹{item.price || item.productPrice || 0}</td>
+                              <td>₹{(item.quantity || 1) * (item.price || item.productPrice || 0)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={handleCloseOrderModal}
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
         </div>
